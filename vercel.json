@@ -1,0 +1,5 @@
+{
+  "buildCommand": "echo 'No build needed for static HTML'",
+  "devCommand": "python -m http.server 3000 2>/dev/null || npx http-server -p 3000",
+  "installCommand": "echo 'No dependencies to install'"
+}
