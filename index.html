@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="theme-color" content="#1E3028">
 <title>Elle Bondoc — The Six Mayfair</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -98,7 +98,7 @@
 
   .logo-svg {
     width: 100%;
-    max-width: 220px;
+    max-width: 320px;
     height: auto;
     margin-bottom: 8px;
   }
@@ -135,29 +135,7 @@
   }
 
   /* ─── AVATAR ─── */
-  .avatar {
-    width: 88px;
-    height: 88px;
-    border-radius: 50%;
-    border: 1.5px solid var(--gold);
-    overflow: hidden;
-    background: var(--green-mid);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-bottom: 22px;
-    position: relative;
-    box-shadow: 0 0 0 4px rgba(184,160,106,0.1), 0 8px 32px rgba(0,0,0,0.4);
-  }
-
-  .avatar-initials {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 30px;
-    font-weight: 300;
-    font-style: italic;
-    color: var(--gold-light);
-    letter-spacing: 0.05em;
-  }
+  /* Avatar removed (initials cleaned per design request) */
 
   /* ─── NAME & TITLE ─── */
   .name {
@@ -364,14 +342,14 @@
 
   .qr-box {
     background: var(--cream);
-    padding: 40px 36px 32px;
+    padding: 28px 28px 22px;
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 18px;
+    gap: 14px;
     position: relative;
-    max-width: 300px;
-    width: 90%;
+    max-width: 320px;
+    width: 92%;
     animation: slideUp 0.25s ease;
   }
 
@@ -402,7 +380,7 @@
 
   #qr-canvas {
     background: white;
-    padding: 10px;
+    padding: 6px;
   }
 
   .qr-sub {
@@ -494,16 +472,13 @@
       <!-- Logo -->
       <div class="logo-wrap">
         <svg class="logo-svg" viewBox="0 0 400 200" xmlns="http://www.w3.org/2000/svg">
-          <text x="200" y="100" font-family="'Cormorant Garamond', serif" font-size="80" font-weight="300" fill="#FFFFFF" text-anchor="middle" letter-spacing="2">The Six</text>
-          <text x="200" y="145" font-family="'Jost', sans-serif" font-size="24" font-weight="400" fill="#F5F0E7" text-anchor="middle" letter-spacing="4">HAIR &amp; BEAUTY</text>
+          <text x="200" y="100" font-family="'Cormorant Garamond', serif" font-size="120" font-weight="300" fill="#FFFFFF" text-anchor="middle" letter-spacing="1">The Six</text>
+          <text x="200" y="142" font-family="'Jost', sans-serif" font-size="30" font-weight="400" fill="#F5F0E7" text-anchor="middle" letter-spacing="3">HAIR &amp; BEAUTY</text>
         </svg>
-        <div class="logo-text" style="margin-top: 12px;">Mayfair</div>
+        <div class="logo-text" style="margin-top: 10px; font-size: 10px; letter-spacing: 0.55em;">Mayfair</div>
       </div>
 
-      <!-- Avatar -->
-      <div class="avatar">
-        <span class="avatar-initials">EB</span>
-      </div>
+
 
       <!-- Name -->
       <h1 class="name">Elle Bondoc</h1>
@@ -678,12 +653,16 @@
   function showQR() {
     const overlay = document.getElementById('qrOverlay');
     overlay.classList.add('active');
+
     if (!qrGenerated) {
       const cardURL = window.location.href;
-      new QRCode(document.getElementById('qr-canvas'), {
+      const canvasEl = document.getElementById('qr-canvas');
+      canvasEl.innerHTML = '';
+
+      new QRCode(canvasEl, {
         text: cardURL,
-        width: 200,
-        height: 200,
+        width: 252,
+        height: 252,
         colorDark: '#1A2E22',
         colorLight: '#ffffff',
         correctLevel: QRCode.CorrectLevel.M
