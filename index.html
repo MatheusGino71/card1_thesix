@@ -1,0 +1,746 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="theme-color" content="#1E3028">
+<title>Elle Bondoc — The Six Mayfair</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Jost:wght@200;300;400&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+<style>
+  :root {
+    --green-deep:  #1A2E22;
+    --green-mid:   #2A4535;
+    --green-soft:  #3D5E4A;
+    --green-light: #5C8A6A;
+    --cream:       #F5F0E7;
+    --ecru:        #EAE2D4;
+    --linen:       #D9CEBC;
+    --gold:        #FFFFFF;
+    --gold-light:  #F5F0E7;
+    --white:       #FDFAF5;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+
+  html, body {
+    min-height: 100%;
+    background: var(--green-deep);
+    font-family: 'Jost', sans-serif;
+    color: var(--cream);
+    overflow-x: hidden;
+  }
+
+  body {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 0;
+    background: 
+      radial-gradient(ellipse 80% 60% at 50% -10%, rgba(93,138,106,0.18) 0%, transparent 70%),
+      var(--green-deep);
+  }
+
+  /* ─── CARD SHELL ─── */
+  .card {
+    width: 100%;
+    max-width: 430px;
+    min-height: 100dvh;
+    background: var(--green-deep);
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+  }
+
+  /* ─── TOP TEXTURE BAND ─── */
+  .card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 360px;
+    background:
+      linear-gradient(160deg, rgba(61,94,74,0.55) 0%, transparent 60%),
+      radial-gradient(ellipse 100% 80% at 30% 20%, rgba(93,138,106,0.25) 0%, transparent 65%);
+    pointer-events: none;
+  }
+
+  /* Grain overlay */
+  .card::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+    opacity: 0.6;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .content { position: relative; z-index: 1; flex: 1; display: flex; flex-direction: column; }
+
+  /* ─── HEADER / LOGO ─── */
+  .header {
+    padding: 52px 36px 28px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .logo-wrap {
+    margin-bottom: 32px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .logo-svg {
+    width: 100%;
+    max-width: 220px;
+    height: auto;
+    margin-bottom: 8px;
+  }
+
+  .logo-text {
+    font-family: 'Jost', sans-serif;
+    font-weight: 200;
+    font-size: 9px;
+    letter-spacing: 0.45em;
+    color: var(--gold);
+    text-transform: uppercase;
+    margin-top: 2px;
+  }
+
+  /* Thin decorative line */
+  .logo-rule {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    width: 120px;
+    margin-top: 6px;
+  }
+  .logo-rule span {
+    flex: 1;
+    height: 0.5px;
+    background: linear-gradient(to right, transparent, var(--gold), transparent);
+  }
+  .logo-rule em {
+    font-style: normal;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 9px;
+    color: var(--gold);
+    letter-spacing: 0.3em;
+  }
+
+  /* ─── AVATAR ─── */
+  .avatar {
+    width: 88px;
+    height: 88px;
+    border-radius: 50%;
+    border: 1.5px solid var(--gold);
+    overflow: hidden;
+    background: var(--green-mid);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 22px;
+    position: relative;
+    box-shadow: 0 0 0 4px rgba(184,160,106,0.1), 0 8px 32px rgba(0,0,0,0.4);
+  }
+
+  .avatar-initials {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 30px;
+    font-weight: 300;
+    font-style: italic;
+    color: var(--gold-light);
+    letter-spacing: 0.05em;
+  }
+
+  /* ─── NAME & TITLE ─── */
+  .name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 34px;
+    font-weight: 400;
+    color: var(--white);
+    letter-spacing: 0.02em;
+    line-height: 1.1;
+    margin-bottom: 8px;
+  }
+
+  .specialty {
+    font-size: 10.5px;
+    font-weight: 300;
+    letter-spacing: 0.32em;
+    color: var(--gold);
+    text-transform: uppercase;
+    margin-bottom: 28px;
+    line-height: 1.6;
+  }
+
+  /* Divider */
+  .divider {
+    width: 40px;
+    height: 0.5px;
+    background: var(--gold);
+    margin: 0 auto 32px;
+    opacity: 0.6;
+  }
+
+  /* ─── CONTACT SECTION ─── */
+  .section {
+    padding: 0 28px;
+    margin-bottom: 6px;
+  }
+
+  .section-label {
+    font-size: 8px;
+    font-weight: 300;
+    letter-spacing: 0.5em;
+    color: var(--gold);
+    text-transform: uppercase;
+    opacity: 0.8;
+    margin-bottom: 10px;
+    padding-left: 2px;
+  }
+
+  .contact-list {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    margin-bottom: 20px;
+  }
+
+  .contact-item {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 14px 18px;
+    background: #F5F0E7;
+    border: 0.5px solid rgba(255,255,255,0.3);
+    text-decoration: none;
+    color: #1A2E22;
+    transition: all 0.25s ease;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .contact-item::before {
+    content: '';
+    position: absolute;
+    left: 0; top: 0; bottom: 0;
+    width: 2px;
+    background: #1A2E22;
+    opacity: 0;
+    transition: opacity 0.2s;
+  }
+
+  .contact-item:hover, .contact-item:active {
+    background: #FFFFFF;
+    border-color: rgba(255,255,255,0.5);
+  }
+  .contact-item:hover::before, .contact-item:active::before { opacity: 1; }
+
+  .contact-icon {
+    width: 34px;
+    height: 34px;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 0.5px solid rgba(26,46,34,0.3);
+    background: rgba(26,46,34,0.08);
+  }
+
+  .contact-icon svg {
+    width: 16px;
+    height: 16px;
+    fill: #1A2E22;
+  }
+
+  .contact-body { flex: 1; min-width: 0; }
+
+  .contact-type {
+    font-size: 8px;
+    font-weight: 300;
+    letter-spacing: 0.35em;
+    color: #3D5E4A;
+    text-transform: uppercase;
+    opacity: 0.85;
+    margin-bottom: 2px;
+  }
+
+  .contact-value {
+    font-size: 13.5px;
+    font-weight: 300;
+    color: #1A2E22;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .contact-arrow {
+    color: rgba(26,46,34,0.5);
+    font-size: 14px;
+    transition: transform 0.2s;
+  }
+  .contact-item:hover .contact-arrow { transform: translateX(2px); }
+
+  /* ─── ACTION BUTTONS ─── */
+  .actions {
+    padding: 20px 28px 28px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+  }
+
+  .btn {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 7px;
+    padding: 16px 12px;
+    border: 0.5px solid rgba(184,160,106,0.25);
+    background: rgba(255,255,255,0.03);
+    cursor: pointer;
+    color: var(--cream);
+    font-family: 'Jost', sans-serif;
+    font-size: 9px;
+    font-weight: 300;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    transition: all 0.25s ease;
+    text-decoration: none;
+  }
+
+  .btn svg {
+    width: 20px;
+    height: 20px;
+    fill: var(--gold-light);
+    transition: transform 0.2s;
+  }
+
+  .btn:hover, .btn:active {
+    background: rgba(184,160,106,0.12);
+    border-color: var(--gold);
+  }
+  .btn:hover svg { transform: scale(1.1); }
+
+  .btn-primary {
+    grid-column: 1 / -1;
+    flex-direction: row;
+    gap: 12px;
+    padding: 18px 20px;
+    background: rgba(184,160,106,0.12);
+    border-color: rgba(184,160,106,0.4);
+    font-size: 10px;
+    letter-spacing: 0.35em;
+  }
+  .btn-primary:hover { background: rgba(184,160,106,0.22); }
+
+  /* ─── QR MODAL ─── */
+  .qr-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(10,20,14,0.92);
+    z-index: 100;
+    align-items: center;
+    justify-content: center;
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    animation: fadeIn 0.2s ease;
+  }
+
+  .qr-overlay.active { display: flex; }
+
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+  }
+
+  .qr-box {
+    background: var(--cream);
+    padding: 40px 36px 32px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 18px;
+    position: relative;
+    max-width: 300px;
+    width: 90%;
+    animation: slideUp 0.25s ease;
+  }
+
+  @keyframes slideUp {
+    from { transform: translateY(20px); opacity: 0; }
+    to   { transform: translateY(0);    opacity: 1; }
+  }
+
+  .qr-box::before, .qr-box::after {
+    content: '';
+    position: absolute;
+    width: 14px;
+    height: 14px;
+    border-color: var(--green-mid);
+    border-style: solid;
+  }
+  .qr-box::before { top: -1px; left: -1px; border-width: 2px 0 0 2px; }
+  .qr-box::after  { bottom: -1px; right: -1px; border-width: 0 2px 2px 0; }
+
+  .qr-logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 13px;
+    letter-spacing: 0.4em;
+    color: var(--green-mid);
+    text-transform: uppercase;
+    font-weight: 400;
+  }
+
+  #qr-canvas {
+    background: white;
+    padding: 10px;
+  }
+
+  .qr-sub {
+    font-family: 'Jost', sans-serif;
+    font-size: 10px;
+    font-weight: 300;
+    letter-spacing: 0.25em;
+    color: var(--green-soft);
+    text-transform: uppercase;
+    text-align: center;
+    line-height: 1.6;
+  }
+
+  .qr-close {
+    margin-top: 4px;
+    padding: 11px 28px;
+    border: 1px solid var(--green-mid);
+    background: transparent;
+    cursor: pointer;
+    font-family: 'Jost', sans-serif;
+    font-size: 9px;
+    letter-spacing: 0.4em;
+    text-transform: uppercase;
+    color: var(--green-mid);
+    transition: all 0.2s;
+  }
+  .qr-close:hover { background: var(--green-mid); color: var(--cream); }
+
+  /* ─── FOOTER ─── */
+  .footer {
+    padding: 20px 28px 36px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    border-top: 0.5px solid rgba(184,160,106,0.12);
+  }
+
+  .footer-logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 10px;
+    letter-spacing: 0.5em;
+    color: var(--gold);
+    opacity: 0.6;
+    text-transform: uppercase;
+  }
+
+  .footer-address {
+    font-size: 10px;
+    font-weight: 300;
+    letter-spacing: 0.1em;
+    color: rgba(245,240,231,0.4);
+    text-align: center;
+    line-height: 1.7;
+  }
+
+  /* ─── TOAST ─── */
+  .toast {
+    position: fixed;
+    bottom: 32px;
+    left: 50%;
+    transform: translateX(-50%) translateY(20px);
+    background: var(--green-soft);
+    color: var(--cream);
+    font-size: 12px;
+    font-weight: 300;
+    letter-spacing: 0.15em;
+    padding: 12px 24px;
+    opacity: 0;
+    pointer-events: none;
+    transition: all 0.3s ease;
+    z-index: 200;
+    white-space: nowrap;
+  }
+  .toast.show {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+  }
+</style>
+</head>
+<body>
+
+<div class="card">
+  <div class="content">
+
+    <!-- HEADER -->
+    <div class="header">
+
+      <!-- Logo -->
+      <div class="logo-wrap">
+        <svg class="logo-svg" viewBox="0 0 400 200" xmlns="http://www.w3.org/2000/svg">
+          <text x="200" y="100" font-family="'Cormorant Garamond', serif" font-size="80" font-weight="300" fill="#FFFFFF" text-anchor="middle" letter-spacing="2">The Six</text>
+          <text x="200" y="145" font-family="'Jost', sans-serif" font-size="24" font-weight="400" fill="#F5F0E7" text-anchor="middle" letter-spacing="4">HAIR &amp; BEAUTY</text>
+        </svg>
+        <div class="logo-text" style="margin-top: 12px;">Mayfair</div>
+      </div>
+
+      <!-- Avatar -->
+      <div class="avatar">
+        <span class="avatar-initials">EB</span>
+      </div>
+
+      <!-- Name -->
+      <h1 class="name">Elle Bondoc</h1>
+      <p class="specialty">Hair Colourist<br>&amp; Hair Stylist</p>
+
+      <div class="divider"></div>
+    </div>
+
+    <!-- PERSONAL CONTACTS -->
+    <div class="section">
+      <p class="section-label">Personal</p>
+      <div class="contact-list">
+
+        <a class="contact-item" href="https://wa.me/447720562556?text=Hi%20Elle!%20I%20found%20your%20card%20and%20would%20love%20to%20book%20an%20appointment." target="_blank" rel="noopener">
+          <div class="contact-icon">
+            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+          </div>
+          <div class="contact-body">
+            <div class="contact-type">WhatsApp</div>
+            <div class="contact-value">+44 7720 562 556</div>
+          </div>
+          <span class="contact-arrow">›</span>
+        </a>
+
+      </div>
+    </div>
+
+    <!-- SALON CONTACTS -->
+    <div class="section">
+      <p class="section-label">The Six Mayfair</p>
+      <div class="contact-list">
+
+        <a class="contact-item" href="https://wa.me/447880666669?text=Hi%20The%20Six!%20I%20found%20your%20card%20and%20would%20love%20to%20book%20an%20appointment." target="_blank" rel="noopener">
+          <div class="contact-icon">
+            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+          </div>
+          <div class="contact-body">
+            <div class="contact-type">WhatsApp Salon</div>
+            <div class="contact-value">+44 7880 666 669</div>
+          </div>
+          <span class="contact-arrow">›</span>
+        </a>
+
+        <a class="contact-item" href="tel:+442045456666">
+          <div class="contact-icon">
+            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02L6.62 10.79z"/></svg>
+          </div>
+          <div class="contact-body">
+            <div class="contact-type">Phone</div>
+            <div class="contact-value">+44 20 4545 6666</div>
+          </div>
+          <span class="contact-arrow">›</span>
+        </a>
+
+        <a class="contact-item" href="https://instagram.com/thesixmayfair" target="_blank" rel="noopener">
+          <div class="contact-icon">
+            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+          </div>
+          <div class="contact-body">
+            <div class="contact-type">Follow us</div>
+            <div class="contact-value">@thesixmayfair</div>
+          </div>
+          <span class="contact-arrow">›</span>
+        </a>
+
+        <a class="contact-item" href="https://www.thesix.com" target="_blank" rel="noopener">
+          <div class="contact-icon">
+            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 2C6.477 2 2 6.477 2 12s4.477 10 10 10 10-4.477 10-10S17.523 2 12 2zm-1 17.93c-3.94-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41C17.93 5.77 20 8.69 20 12c0 2.08-.81 3.98-2.1 5.39z"/></svg>
+          </div>
+          <div class="contact-body">
+            <div class="contact-type">Website</div>
+            <div class="contact-value">thesix.com</div>
+          </div>
+          <span class="contact-arrow">›</span>
+        </a>
+
+        <a class="contact-item" href="mailto:info@thesix.com">
+          <div class="contact-icon">
+            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+          </div>
+          <div class="contact-body">
+            <div class="contact-type">Email</div>
+            <div class="contact-value">info@thesix.com</div>
+          </div>
+          <span class="contact-arrow">›</span>
+        </a>
+
+      </div>
+    </div>
+
+    <!-- ACTION BUTTONS -->
+    <div class="actions">
+
+      <!-- Save Contact (full row) -->
+      <button class="btn btn-primary" onclick="saveContact()">
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M17 3H5a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2V7l-4-4zm-5 16a3 3 0 110-6 3 3 0 010 6zm3-10H5V5h10v4z"/></svg>
+        Save Contact
+      </button>
+
+      <!-- QR Code -->
+      <button class="btn" onclick="showQR()">
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M3 11h8V3H3v8zm2-6h4v4H5V5zm8-2v8h8V3h-8zm6 6h-4V5h4v4zM3 21h8v-8H3v8zm2-6h4v4H5v-4zm13 4h-3v-3h-2v5h5v-2zm0-8h-2v2h2v-2zm2 4h-2v2h2v-2zm0-4h-2v-2h2v2zm2 0h-2v-2h2v2zm0 4h-2v-2h2v2zm-2 4h-2v-2h2v2z"/></svg>
+        QR Code
+      </button>
+
+      <!-- Share -->
+      <button class="btn" onclick="shareCard()">
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81 1.66 0 3-1.34 3-3s-1.34-3-3-3-3 1.34-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9c-1.66 0-3 1.34-3 3s1.34 3 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.16c-.05.21-.08.43-.08.65 0 1.61 1.31 2.92 2.92 2.92 1.61 0 2.92-1.31 2.92-2.92 0-1.61-1.31-2.92-2.92-2.92z"/></svg>
+        Share
+      </button>
+
+    </div>
+
+    <!-- FOOTER -->
+    <div class="footer">
+      <div class="footer-logo">The Six · Mayfair</div>
+      <div class="footer-address">6 Queen Street, London W1J 5PA<br>London · United Kingdom</div>
+    </div>
+
+  </div>
+</div>
+
+<!-- QR OVERLAY -->
+<div class="qr-overlay" id="qrOverlay" onclick="closeQR(event)">
+  <div class="qr-box" id="qrBox">
+    <div class="qr-logo">The Six · Mayfair</div>
+    <div id="qr-canvas"></div>
+    <div class="qr-sub">Scan to open this card<br>or share with clients</div>
+    <button class="qr-close" onclick="hideQR()">Close</button>
+  </div>
+</div>
+
+<!-- TOAST -->
+<div class="toast" id="toast"></div>
+
+<script>
+  /* ─── vCard / Save Contact ─── */
+  function saveContact() {
+    const vcard = [
+      'BEGIN:VCARD',
+      'VERSION:3.0',
+      'FN:Elle Bondoc',
+      'N:Bondoc;Elle;;;',
+      'ORG:The Six Mayfair',
+      'TITLE:Hair Colourist & Hair Stylist',
+      'TEL;TYPE=CELL,PREF:+447720562556',
+      'TEL;TYPE=WORK:+442045456666',
+      'TEL;TYPE=WORK,MSG:+447880666669',
+      'EMAIL;TYPE=WORK:info@thesix.com',
+      'URL:https://www.thesix.com',
+      'ADR;TYPE=WORK:;;6 Queen Street;London;;W1J 5PA;United Kingdom',
+      'X-SOCIALPROFILE;TYPE=instagram:thesixmayfair',
+      'NOTE:Hair Colourist & Hair Stylist at The Six Mayfair. For appointments contact via WhatsApp.',
+      'END:VCARD'
+    ].join('\r\n');
+
+    const blob = new Blob([vcard], { type: 'text/vcard;charset=utf-8' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'Elle-Bondoc-TheSix.vcf';
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+    showToast('Contact saved ✓');
+  }
+
+  /* ─── QR Code ─── */
+  let qrGenerated = false;
+
+  function showQR() {
+    const overlay = document.getElementById('qrOverlay');
+    overlay.classList.add('active');
+    if (!qrGenerated) {
+      const cardURL = window.location.href;
+      new QRCode(document.getElementById('qr-canvas'), {
+        text: cardURL,
+        width: 200,
+        height: 200,
+        colorDark: '#1A2E22',
+        colorLight: '#ffffff',
+        correctLevel: QRCode.CorrectLevel.M
+      });
+      qrGenerated = true;
+    }
+  }
+
+  function hideQR() {
+    document.getElementById('qrOverlay').classList.remove('active');
+  }
+
+  function closeQR(e) {
+    if (e.target === document.getElementById('qrOverlay')) hideQR();
+  }
+
+  /* ─── Share ─── */
+  async function shareCard() {
+    const shareData = {
+      title: 'Elle Bondoc — The Six Mayfair',
+      text: 'Hair Colourist & Hair Stylist at The Six Mayfair\nWhatsApp: +44 7720 562556\nSalon: +44 20 4545 6666\nInstagram: @thesixmayfair',
+      url: window.location.href
+    };
+
+    if (navigator.share) {
+      try {
+        await navigator.share(shareData);
+      } catch (e) {
+        if (e.name !== 'AbortError') fallbackShare();
+      }
+    } else {
+      fallbackShare();
+    }
+  }
+
+  function fallbackShare() {
+    const text = window.location.href;
+    if (navigator.clipboard) {
+      navigator.clipboard.writeText(text).then(() => showToast('Link copied ✓'));
+    } else {
+      const ta = document.createElement('textarea');
+      ta.value = text;
+      document.body.appendChild(ta);
+      ta.select();
+      document.execCommand('copy');
+      document.body.removeChild(ta);
+      showToast('Link copied ✓');
+    }
+  }
+
+  /* ─── Toast ─── */
+  function showToast(msg) {
+    const t = document.getElementById('toast');
+    t.textContent = msg;
+    t.classList.add('show');
+    setTimeout(() => t.classList.remove('show'), 2500);
+  }
+</script>
+</body>
+</html>
